@@ -22,15 +22,40 @@ class LinkedList():
     def prepend(self,data):
         new_node = Node()
         self.append(None)
-        cur = self.head
+        cur = self.head.next
         nextData = 0
         while cur.next != None:
+            newData =cur.data
             cur = cur.next
-            cur.data = nextData
-            nextData = cur.data
-        
+            cur.data = newData
+        self.head.next.data = data
+    def length(self):
+        cur = self.head
+        total = 0
+        while cur.next != None:
+            cur = cur.next
+            total += 1
+        return total
+    def get(self,index):
+        cur_idx = 0
+        cur =self.head
+        if index > self.length():
+            return 'Error: out of index'
+        while index > cur_idx-1:
+            cur = cur.next
+            cur_idx += 1
+        return cur.data
+    def remove(self,index):
+        cur_idx = 0
+        cur =self.head
+        if index > self.length():
+            return 'Error: out of index'
+        while index > cur_idx:
+            cur = cur.next
+            cur_idx += 1
+        cur.next =cur.next.next
             
-
+            
 
 if __name__ == '__main__':
     listLink = LinkedList()
@@ -41,4 +66,8 @@ if __name__ == '__main__':
     print(listLink.display())
     listLink.append(8)
     print(listLink.display())
+    print(f'The length is: {listLink.length()}')
+    print(listLink.get(0))
+    listLink.remove(1)
+    
 
